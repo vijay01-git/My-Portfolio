@@ -1,0 +1,281 @@
+.ai-companion {
+  --gold: #f4c95d;
+  --gold-bright: #ffe69a;
+  --violet: #766cff;
+  --ink: #121521;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 12;
+  width: var(--companion-size);
+  height: calc(var(--companion-size) + 32px);
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  transition: opacity 0.25s ease;
+}
+.ai-companion--entrance {
+  opacity: 0;
+}
+.ai-companion__character {
+  position: relative;
+  display: block;
+  width: var(--companion-size);
+  height: var(--companion-size);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 12px 13px rgba(0, 0, 0, 0.32));
+}
+.ai-companion__character:active {
+  cursor: grabbing;
+}
+.ai-companion__body {
+  position: absolute;
+  left: 10%;
+  bottom: 12%;
+  width: 80%;
+  height: 72%;
+  border: 3px solid var(--ink);
+  border-radius: 45% 45% 38% 38%;
+  background: linear-gradient(145deg, var(--gold-bright), var(--gold));
+  box-shadow:
+    inset -8px -10px 0 rgba(118, 108, 255, 0.2),
+    0 0 25px rgba(244, 201, 93, 0.16);
+  transition: transform 0.2s ease;
+}
+.ai-companion__visor {
+  position: absolute;
+  top: 21%;
+  left: 13%;
+  display: block;
+  width: 74%;
+  height: 31%;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  border-radius: 48%;
+  background: #292d4b;
+  box-shadow: inset 0 0 12px rgba(118, 108, 255, 0.75);
+}
+.ai-companion__eye {
+  position: absolute;
+  top: 32%;
+  width: 14%;
+  height: 34%;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 8px var(--gold-bright);
+  transform: translate(var(--look-x, 0), var(--look-y, 0));
+  transition:
+    transform 0.2s ease,
+    height 0.15s ease;
+}
+.ai-companion__eye--left {
+  left: 25%;
+}
+.ai-companion__eye--right {
+  right: 25%;
+}
+.ai-companion__spark {
+  position: absolute;
+  top: 13%;
+  right: 17%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+}
+.ai-companion__antenna {
+  position: absolute;
+  top: 2%;
+  left: 48%;
+  width: 4px;
+  height: 17%;
+  border-radius: 3px;
+  background: var(--ink);
+  transform: rotate(7deg);
+}
+.ai-companion__antenna::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: -4px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 12px var(--coral);
+}
+.ai-companion__ear {
+  position: absolute;
+  top: 18%;
+  width: 23%;
+  height: 28%;
+  border: 3px solid var(--ink);
+  border-radius: 70% 20% 60% 20%;
+  background: var(--violet);
+}
+.ai-companion__ear--left {
+  left: 6%;
+  transform: rotate(-30deg);
+}
+.ai-companion__ear--right {
+  right: 6%;
+  transform: scaleX(-1) rotate(-30deg);
+}
+.ai-companion__core {
+  position: absolute;
+  left: 42%;
+  bottom: 19%;
+  width: 16%;
+  height: 12%;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 12px rgba(255, 111, 97, 0.8);
+}
+.ai-companion__foot {
+  position: absolute;
+  bottom: -7%;
+  width: 26%;
+  height: 17%;
+  border: 3px solid var(--ink);
+  border-radius: 45%;
+  background: var(--violet);
+}
+.ai-companion__foot--left {
+  left: 12%;
+  transform: rotate(9deg);
+}
+.ai-companion__foot--right {
+  right: 12%;
+  transform: rotate(-9deg);
+}
+.ai-companion__speech {
+  position: absolute;
+  right: 65%;
+  bottom: calc(100% - 13px);
+  width: max-content;
+  max-width: 180px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 12px 12px 3px 12px;
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  color: var(--ink);
+  font-size: 0.69rem;
+  line-height: 1.35;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px);
+  animation: companionSpeechIn 0.22s ease-out;
+}
+.ai-companion__status {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+.ai-companion--idle .ai-companion__body {
+  animation: companionBreathe 3.6s ease-in-out infinite;
+}
+.ai-companion--walking .ai-companion__body {
+  animation: companionWalk 0.45s ease-in-out infinite alternate;
+}
+.ai-companion--happy .ai-companion__body {
+  animation: companionHappy 0.7s ease;
+}
+.ai-companion--dragging .ai-companion__body {
+  transform: scale(1.08, 0.92) rotate(-4deg);
+}
+.ai-companion--dragging .ai-companion__eye {
+  height: 27%;
+}
+.ai-companion--thrown .ai-companion__character {
+  animation: companionTumble 0.55s linear infinite;
+}
+.ai-companion--falling .ai-companion__body {
+  animation: companionBreathe 1.1s ease-in-out infinite;
+}
+.ai-companion--bouncing .ai-companion__body {
+  animation: companionSquash 0.45s ease;
+}
+.ai-companion--entrance .ai-companion__character {
+  transform: translateX(70px);
+}
+@keyframes companionBreathe {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-3px) scaleY(1.02);
+  }
+}
+@keyframes companionWalk {
+  from {
+    transform: translateY(0) rotate(-3deg);
+  }
+  to {
+    transform: translateY(-4px) rotate(3deg);
+  }
+}
+@keyframes companionHappy {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    transform: translateY(-12px) scale(1.06);
+  }
+}
+@keyframes companionTumble {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes companionSquash {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  35% {
+    transform: scale(1.15, 0.78);
+  }
+}
+@keyframes companionSpeechIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 800px) {
+  .ai-companion {
+    --companion-size: 70px !important;
+  }
+  .ai-companion__speech {
+    max-width: 130px;
+    font-size: 0.61rem;
+  }
+  .ai-companion__status {
+    font-size: 0.44rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-companion *,
+  .ai-companion::before,
+  .ai-companion::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
