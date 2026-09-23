@@ -1,7 +1,10 @@
 // ============================================================
 // PORTFOLIO DATA — Edit this file to update your portfolio
 // ============================================================
-
+import emsimg from "../assets/EMS.png";
+import kitchnox from "../assets/kitchnox.png";
+import My_Portfolio from "../assets/personal_portfolio.png";
+import sp from "../assets/toonverse.png";
 export const personalInfo = {
   name: "VIJAY M",
   role: "Software Developer",
@@ -113,7 +116,7 @@ export const projectsData = [
       "OOP",
       "Exception handling",
     ],
-    image: "", // Add your project screenshot path here
+    image: emsimg, // Add your project screenshot path here
     github: "", // Add your GitHub repo link
     live: "", // Add your live demo link
     caseStudy: "", // Add case study link if available
@@ -124,7 +127,7 @@ export const projectsData = [
     title: "KitchenNox Corporate Website",
     description:
       "Responsive multi-page corporate website with a modern professional interface.",
-    technologies: ["HTML5", "CSS3"],
+    technologies: ["HTML5", "CSS3", "JavaScript"],
     features: [
       "Home",
       "About",
@@ -135,7 +138,7 @@ export const projectsData = [
       "FAQ",
       "Contact",
     ],
-    image: "",
+    image: kitchnox,
     github: "",
     live: "",
     caseStudy: "",
@@ -148,7 +151,7 @@ export const projectsData = [
       "Responsive personal portfolio website designed to showcase technical skills, projects, experience and education.",
     technologies: ["HTML5", "CSS3"],
     features: [],
-    image: "",
+    image: My_Portfolio,
     github: "",
     live: "",
     caseStudy: "",
@@ -156,15 +159,15 @@ export const projectsData = [
   {
     id: 4,
     number: "04",
-    title: "Coming Soon",
+    title: "Toonverse",
     description:
-      "A new project is currently in development. Stay tuned for updates.",
-    technologies: [],
-    image: "",
+      "A responsive cartoon and anime streaming platform built with React.js, featuring content browsing, search, detailed views, and a modern user-friendly interface.",
+    technologies: ["HTNL5", "CSS3", "JavaScript", "React.js"],
+    image: sp,
     github: "",
     live: "",
     caseStudy: "",
-    comingSoon: true,
+    comingSoon: false,
   },
   {
     id: 5,

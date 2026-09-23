@@ -1,8 +1,18 @@
-import { ExternalLink, FolderOpen, ArrowUpRight, Lock } from 'lucide-react';
-import { GithubIcon } from './SocialIcons';
+import { ExternalLink, FolderOpen, ArrowUpRight, Lock } from "lucide-react";
+import { GithubIcon } from "./SocialIcons";
 
 export default function ProjectCard({ project }) {
-  const { number, title, description, technologies, image, github, live, caseStudy, comingSoon } = project;
+  const {
+    number,
+    title,
+    description,
+    technologies,
+    image,
+    github,
+    live,
+    caseStudy,
+    comingSoon,
+  } = project;
 
   if (comingSoon) {
     return (
@@ -10,7 +20,9 @@ export default function ProjectCard({ project }) {
         <div className="project-card__image">
           <div className="project-card__image-placeholder">
             <Lock size={28} className="project-card__image-placeholder-icon" />
-            <span className="project-card__image-placeholder-text">In Development</span>
+            <span className="project-card__image-placeholder-text">
+              In Development
+            </span>
           </div>
           <span className="project-card__number">{number}</span>
         </div>
@@ -31,8 +43,13 @@ export default function ProjectCard({ project }) {
           <img src={image} alt={`${title} screenshot`} loading="lazy" />
         ) : (
           <div className="project-card__image-placeholder">
-            <FolderOpen size={32} className="project-card__image-placeholder-icon" />
-            <span className="project-card__image-placeholder-text">Add screenshot</span>
+            <FolderOpen
+              size={32}
+              className="project-card__image-placeholder-icon"
+            />
+            <span className="project-card__image-placeholder-text">
+              Add screenshot
+            </span>
           </div>
         )}
         <span className="project-card__number">{number}</span>
