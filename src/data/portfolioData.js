@@ -12,9 +12,10 @@ export const personalInfo = {
   email: "vijaym5701it@gmail.com",
   phone: "+91 6374021562",
   location: "Bangalore, India",
-  resumeUrl: "#", // Replace with your actual resume PDF link
-  linkedin: "#", // Replace with your LinkedIn URL
-  github: "#", // Replace with your GitHub URL
+  resumeUrl:
+    "https://drive.google.com/file/d/1GIiw4tRVjZ-GQUETT27kQ-CHXrwUY6xZ/view?usp=drive_link", // Replace with your actual resume PDF link
+  linkedin: "https://www.linkedin.com/in/vijay-java-developer/", // Replace with your LinkedIn URL
+  github: "https://github.com/vijay01-git", // Replace with your GitHub URL
 };
 
 export const aboutData = {
@@ -63,20 +64,19 @@ export const experienceData = [
       "Assisted backend teams with integrating frontend pages with Java/RESTful services.",
       "Participated in code reviews, bug fixing, testing and deployment processes.",
     ],
-    technologies: [
-      "HTML5",
-      "CSS3",
-      "JavaScript",
-      "Core Java",
-      "JDBC",
-      "MySQL",
-    ],
+    technologies: ["HTML5", "CSS3", "JavaScript", "Core Java", "JDBC", "MySQL"],
   },
 ];
 
 export const skillsData = {
   Programming: ["Java", "JavaScript", "SQL"],
-  Frontend: ["HTML5", "CSS3", "JavaScript", "Responsive Web Design", "React.js"],
+  Frontend: [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "Responsive Web Design",
+    "React.js",
+  ],
   BackendDatabase: [
     "Core Java",
     "OOP",
@@ -85,15 +85,15 @@ export const skillsData = {
     "MySQL",
     "RDBMS",
   ],
-  DSA: [
-    "Arrays",
-    "Strings",
-    "Linked Lists",
-    "Stacks",
-    "Queues",
-    "Sorting",
-    "Problem Solving",
-  ],
+  // DSA: [
+  //   "Arrays",
+  //   "Strings",
+  //   "Linked Lists",
+  //   "Stacks",
+  //   "Queues",
+  //   "Sorting",
+  //   "Problem Solving",
+  // ],
   Tools: ["Eclipse IDE", "VS Code", "Git/GitHub", "Apache Tomcat", "Maven"],
 };
 
@@ -157,7 +157,8 @@ export const projectsData = [
     id: 4,
     number: "04",
     title: "Coming Soon",
-    description: "A new project is currently in development. Stay tuned for updates.",
+    description:
+      "A new project is currently in development. Stay tuned for updates.",
     technologies: [],
     image: "",
     github: "",
@@ -169,7 +170,8 @@ export const projectsData = [
     id: 5,
     number: "05",
     title: "Coming Soon",
-    description: "A new project is currently in development. Stay tuned for updates.",
+    description:
+      "A new project is currently in development. Stay tuned for updates.",
     technologies: [],
     image: "",
     github: "",
@@ -181,7 +183,8 @@ export const projectsData = [
     id: 6,
     number: "06",
     title: "Coming Soon",
-    description: "A new project is currently in development. Stay tuned for updates.",
+    description:
+      "A new project is currently in development. Stay tuned for updates.",
     technologies: [],
     image: "",
     github: "",
