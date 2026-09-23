@@ -9,9 +9,6 @@ import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
-// AI Companion — commented out, not in use
-// import AICompanion from "./components/AICompanion/AICompanion";
-import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -74,8 +71,7 @@ function App() {
       </div>
 
       {/* Navigation */}
-      <Navbar />
-      <ThemeToggle
+      <Navbar
         theme={theme}
         onToggle={() =>
           setTheme((current) => (current === "dark" ? "light" : "dark"))

@@ -241,8 +241,10 @@ export const heroBadges = [
 ];
 
 export const roleOptions = [
-  "Software Developer",
   "Frontend Developer",
+  "React.js Developer",
+  "Software Developer",
+  "Full Stack Developer",
   "Java Developer",
 ];
 

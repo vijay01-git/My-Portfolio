@@ -64,55 +64,68 @@ function Cube3D() {
   );
 }
 
-export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(
-    Math.max(0, roleOptions.indexOf(personalInfo.role)),
-  );
-  const [displayedRole, setDisplayedRole] = useState("");
+/**
+ * Typewriter hook — cleanly manages typing loop inside useEffect.
+ * Cycles: type → pause → erase → pause → next word → repeat
+ */
+function useTypewriter(words, typingSpeed = 80, erasingSpeed = 45, pauseAfterType = 1500, pauseAfterErase = 300) {
+  const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [text, setText] = useState(() => (prefersReduced ? words[0] || "" : ""));
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplayedRole(roleOptions[roleIndex]);
-      return;
-    }
+    if (prefersReduced || !words.length) return;
 
-    let cancelled = false;
-    const currentRole = roleOptions[roleIndex];
-    let charIndex = 0;
-    let phase = "typing"; // "typing" → "pausing" → "erasing"
+    let index = 0;
+    let char = 0;
+    let phase = "typing"; // "typing" | "pausing" | "erasing" | "waiting"
+    let timer = null;
 
     const tick = () => {
-      if (cancelled) return;
+      const currentWord = words[index] || "";
 
       if (phase === "typing") {
-        charIndex += 1;
-        setDisplayedRole(currentRole.slice(0, charIndex));
-        if (charIndex >= currentRole.length) {
+        char += 1;
+        setText(currentWord.slice(0, char));
+
+        if (char >= currentWord.length) {
           phase = "pausing";
-          setTimeout(() => !cancelled && tick(), 1200);
-          return;
+          timer = setTimeout(tick, pauseAfterType);
+        } else {
+          timer = setTimeout(tick, typingSpeed);
         }
-        setTimeout(() => !cancelled && tick(), 65);
       } else if (phase === "pausing") {
         phase = "erasing";
-        setTimeout(() => !cancelled && tick(), 40);
+        timer = setTimeout(tick, erasingSpeed);
       } else if (phase === "erasing") {
-        charIndex -= 1;
-        setDisplayedRole(currentRole.slice(0, charIndex));
-        if (charIndex <= 0) {
-          setTimeout(() => {
-            if (!cancelled) setRoleIndex((i) => (i + 1) % roleOptions.length);
-          }, 300);
-          return;
+        char -= 1;
+        setText(currentWord.slice(0, char));
+
+        if (char <= 0) {
+          phase = "waiting";
+          timer = setTimeout(tick, pauseAfterErase);
+        } else {
+          timer = setTimeout(tick, erasingSpeed);
         }
-        setTimeout(() => !cancelled && tick(), 40);
+      } else if (phase === "waiting") {
+        index = (index + 1) % words.length;
+        char = 0;
+        phase = "typing";
+        timer = setTimeout(tick, typingSpeed);
       }
     };
 
-    setTimeout(() => !cancelled && tick(), 200);
+    timer = setTimeout(tick, 400);
 
-    return () => { cancelled = true; };
-  }, [roleIndex]);
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [prefersReduced, words, typingSpeed, erasingSpeed, pauseAfterType, pauseAfterErase]);
+
+  return text;
+}
+
+export default function Hero() {
+  const displayedRole = useTypewriter(roleOptions);
 
   const handleScrollTo = (e, id) => {
     e.preventDefault();
@@ -129,8 +142,9 @@ export default function Hero() {
 
           <h1 className="hero__heading">
             {personalInfo.name} <br />
-            <span className="hero__heading-highlight hero__heading-highlight--typing">
-              {displayedRole}
+            <span className="hero__heading-highlight">
+              {displayedRole || "\u00A0"}
+              <span className="hero__typing-cursor" aria-hidden="true" />
             </span>
           </h1>
 
@@ -185,3 +199,4 @@ export default function Hero() {
     </section>
   );
 }
+
